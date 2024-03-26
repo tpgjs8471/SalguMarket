@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.SalGuMarket.www.repository.ChatRoomMapper">
+  
+    <!-- 신규 채팅방 생성 -->
+    <insert id="createRoom"  >
+        insert into chatting_room (chat_name, seller_nick, buyer_nick, seller_email, buyer_email, pno, price) 
+        values (#{chatName}, #{sellerNick}, #{buyerNick}, #{sellerEmail}, #{buyerEmail}, 1, 0)
+    </insert>
+
+    <!-- 특정 채팅방 조회 -->
+    <select id="joinRoom" resultType="com.SalGuMarket.www.domain.ChatRoom">
+        select * from chatting_room
+        where chat_bno = #{chatBno}
+    </select>
+
+    <!-- 모든 채팅방 목록 조회 -->
+    <select id="findAllRoom" resultType="com.SalGuMarket.www.domain.ChatRoom">
+        select * from chatting_room
+    </select>
+    
+    <select id="chattingSend" parameterType="long" resultType="com.SalGuMarket.www.domain.ChatRoom">
+    	select * from chatting_room
+    	where chat_bno = #{chatBno}
+    </select>
+	  
+  </mapper>

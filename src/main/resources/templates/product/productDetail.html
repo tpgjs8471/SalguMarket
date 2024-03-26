@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+<th:block th:fragment="content">
+	<script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                th:src="@{/upload/{saveDir}/{uuid}_main_{fileName}(saveDir=${mainImage.saveDir}, uuid=${mainImage.uuid}, fileName=${mainImage.fileName})}" alt="">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img th:data-imgbigurl="@{/upload/{saveDir}/{uuid}_{fileName}(saveDir=${file.saveDir}, uuid=${file.uuid}, fileName=${file.fileName})}"
+                            	th:src="@{/upload/{saveDir}/{uuid}_minor_{fileName}(saveDir=${file.saveDir}, uuid=${file.uuid}, fileName=${file.fileName})}" alt=""
+                            	th:each="file : ${minorIamgeList}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>[[${pvo.title}]]</h3>
+                        <div class="product__details__price"><span>[[${pvo.price}]] ETH</span></div>
+                        <p>[[${pvo.content}]]</p>
+                        <a href="#" id="purchaseProduct" class="primary-btn">구매 신청</a>
+                        <input id="purchaseProductPrice" type="text" th:value="${pvo.price}" hidden="">
+                        <input id="purchaseProductId" type="text" th:value="${pvo.pno}" hidden="">
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt">비동기 통신으로 찜에 대한 처리를 해야할 것 같다.</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+    
+    <script type="text/javascript" th:inline="javascript">
+    	let loginUserWalletAddress = [[${#authentication.principal.mvo.walletAddress}]];
+    	// principal은 AuthMember 객체이다.
+    	console.log(">>> 살구마켓 로그인 사용자의 지갑 주소 >>> ", loginUserWalletAddress);
+	</script>
+    <script src="/js/safeTrade.js"></script>
+		
+</th:block>
+</th:block>

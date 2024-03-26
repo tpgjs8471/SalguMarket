@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+<th:block th:fragment="content">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오톡</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/css/chatRoom.css">
+
+<div class="container_chatRoom">
+<div class="container_kakao">
+
+        <div class="top">
+            <div class="top-left">
+                <img class="profile-img" src="/" />
+                <div class="profile-name">판매상품 / 이미지</div>
+            </div>
+            <div class="top-right">
+            	<button type="button" value="방나가기" class="quit" onclick="quit()">X </button>
+            </div>
+        </div>
+        <div class="middle">
+        <div id="msgArea">
+            
+        </div>
+        </div>
+        <div class="bottom">
+        	<!-- <input type="text" id="email" th:value="${authMember.email}"> -->
+        	<!-- <input type="text" id="nickName" th:value="${authMember.nickName}"> -->
+        	<textarea class="textarea" id="content" placeholder="보낼 메세지를 입력하세요."></textarea>
+            <button type="button" class="button" id="sendBtn" onclick="sendMsg()">전송</button>
+        </div>
+
+
+
+</div>
+
+
+
+</div>
+<script th:inline="javascript">
+	const chatBno = [[${room.chatBno}]];
+</script>
+<script src="/js/chattingSpread.js"></script>
+<script th:inline="javascript">
+spreadChatList(chatBno);
+</script>
+
+</th:block>
+</th:block>

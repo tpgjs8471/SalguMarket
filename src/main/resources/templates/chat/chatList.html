@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+<th:block th:fragment="content">
+<link rel="stylesheet" type="text/css" href="/css/chatList.css">
+
+<div class="container">
+
+        <form action="/chat/createRoom" method="post">
+            <input type="text" name="chatName" placeholder="채팅방 이름">
+            <input type="text" name="sellerNick" placeholder="판매자 닉네임">
+            <input type="text" name="buyerNick" placeholder="구매자 닉네임">
+            <input type="text" name="sellerEmail" placeholder="판매자 이메일">
+            <input type="text" name="buyerEmail" placeholder="구매자 이메일">
+            <button type="submit">방 만들기</button>
+        </form>
+        
+	
+<div class="kakaotalk">
+  <div class="chat-list">
+          <div class="list">
+            <div class="list-left">
+                <div class="profile-name">채팅</div>
+            </div>
+            <div class="list-right">
+            	<button type="button" class="iconBtn"><i class="bi bi-search"></i></button>
+            	<button type="button" class="iconBtn"><i class="bi bi-chat"></i></button>
+            </div>
+        </div>
+    <div th:each="room : ${roomList}" class="chat-room">
+      <div class="info">
+        <img src="/" alt="상품이미지" class="chat-icon">
+        <a th:href="@{/chat/chatRoom(chatBno=${room.chatBno})}" th:text="${room.chatName}" class="chat-name"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+</th:block>
+</th:block>

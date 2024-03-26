@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.SalGuMarket.www.repository.ChattingLogMapper">
+  
+	<insert id="saveChattingLog">
+		insert into chatting_log (chat_content, sender_email,sender_nick, reg_at, chat_bno)
+		values (#{chatContent}, "test@test.test",#{senderNick} ,now() ,#{chatBno})
+	</insert>
+
+	<select id="getChatMessage" resultType="com.SalGuMarket.www.domain.ChatMessage">
+		select * from chatting_log where chat_bno=#{chatBno}
+	</select>
+
+  </mapper>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link rel="stylesheet" href="/css/productSale.css" type="text/css">
+</head>
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+<th:block th:fragment="content">
+	<script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+	
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <h4>판매 등록</h4>
+                <form action="/product/productSale" method="post" id="createProductForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="checkout__input">
+                                <p>제목</p>
+                                <input type="text" name="title" style="color: black;">
+                            </div>
+                            
+                            <div class="checkout__input">
+                                <p>카테고리</p>
+                                <!-- /* <div class="form-check" id="special-diveee">
+								  <input class="form-check-input" type="radio" name="category" id="category1" value="all" checked>
+								  <label class="form-check-label" for="category1">
+								    전체
+								  </label>
+								</div> */ -->
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category2" value="beauty">
+								  <label class="form-check-label" for="category2">
+								    뷰티/미용
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category3" value="clothes">
+								  <label class="form-check-label" for="category3">
+								    의류/잡화
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category4" value="elec">
+								  <label class="form-check-label" for="category4">
+								    전자/생활가전
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category5" value="ticket">
+								  <label class="form-check-label" for="category5">
+								    티켓/교환권
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category6" value="animal">
+								  <label class="form-check-label" for="category6">
+								    반려동물
+								  </label>
+								</div>
+								<div class="form-check">
+								  <input class="form-check-input" type="radio" name="category" id="category7" value="free">
+								  <label class="form-check-label" for="category7">
+								    나눔
+								  </label>
+								</div>
+                            </div>
+                            
+                            <div class="checkout__input">
+                                <p>내용</p>
+                                <textarea rows="5" cols="" name="content" style="width: 100%;" placeholder="제품 상세 설명"></textarea>
+                            </div>
+                            
+                            <div class="checkout__input">
+                                <p>판매 가격 (ETH)</p>
+                                <input type="text" name="price" value="0" id="createProductValue" style="color: black !important;">
+                                <span id="priceSpan" style="color: red !important;" hidden="">가격을 입력해 주세요.</span>
+                            </div>
+                            
+                            <!-- file upload 등록 라인 -->
+							<div class="mb-3 checkout__input">
+							  <p for="files1" class="form-label">Main Image File</p>
+							  <input type="file" name="files1" class="form-control" id="files1" multiple="multiple" style="display: none">
+							  <button type="button" class="btn btn-primary" id="fileTrigger1">Main File Upload</button>
+							  <!-- <input type="file"> 대신 사용할 버튼 -->
+							</div>
+							<!-- 파일 목록 표기 라인 -->
+							<div class="mb-3" id="fileZone1">
+								<!-- JS로 첨부 파일이 표시될 영역 -->
+							</div>
+							
+							<div class="mb-3 checkout__input">
+							  <p for="files2" class="form-label">Minor Image Files</p>
+							  <input type="file" name="files2" class="form-control" id="files2" multiple="multiple" style="display: none">
+							  <button type="button" class="btn btn-primary" id="fileTrigger2">Minor File Upload</button>
+							  <!-- <input type="file"> 대신 사용할 버튼 -->
+							</div>
+							<!-- 파일 목록 표기 라인 -->
+							<div class="mb-3" id="fileZone2">
+								<!-- JS로 첨부 파일이 표시될 영역 -->
+							</div>
+							<!-- file upload 라인 끝 -->
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <button type="button" class="site-btn fileRegisterButton" id="createProduct" disabled="disabled">판매 등록</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+    
+    <script type="text/javascript" th:inline="javascript">
+    	let loginUserWalletAddress = [[${#authentication.principal.mvo.walletAddress}]];
+    	// principal은 AuthMember 객체이다.
+    	console.log(">>> 살구마켓 로그인 사용자의 지갑 주소 >>> ", loginUserWalletAddress);
+	</script>
+    <script src="/js/productSale.js"></script>
+    <script src="/js/safeTrade.js"></script>
+    <script src="/js/fileRegister.js"></script>
+    
+</th:block>
+</th:block>
